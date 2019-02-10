@@ -53,6 +53,12 @@ class Dashboard extends Component{
     }
 }
 
+const mapStateToProps = state => {
+    return{
+        data: state.data
+    }
+}
+
 const mapDispatchToProps = dispatch => {
     return {
         onSubmit: (city, days) => dispatch(actions.fetch(city, days))
@@ -60,4 +66,4 @@ const mapDispatchToProps = dispatch => {
 };
 
 
-export default connect(null, mapDispatchToProps)(Dashboard);
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
