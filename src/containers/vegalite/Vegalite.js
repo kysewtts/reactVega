@@ -24,13 +24,19 @@ class Vegalite extends Component{
     }
     const spec = {
       "description": "A simple bar chart with embedded data.",
-      "width": 200,
+      "width": 300,
+      "height": 300,
+      "padding": {
+        "left": 5,
+        "right": 5,
+        "top": 5,
+        "bottom": 5
+      },
       "mark": "line",
-      "binSpacing": 10,
       "encoding": {
-        "x": {"field": "date", "type": "ordinal"},
-        "y": {"field": "day.avgtemp_c", "type": "quantitative"}
-      }
+        "x": {"field": "date", "type": "ordinal", "title": "Date"},
+        "y": {"field": "day.avgtemp_c", "type": "quantitative", "title": "Average temperature in Celsius"}
+      },
     };
 
     let style = {
@@ -46,12 +52,15 @@ class Vegalite extends Component{
     }
     let vegalite = (
       <div className = "container center" style = {style}>
-        <VegaLite spec={spec} data = {barData} />
+        <VegaLite spec = {spec} data = {barData} />
         <p className="center"><b>Weather forecast for {this.props.location}</b></p>
       </div>
     );
     if(this.props.loading){
       vegalite = <Spinner />
+    }
+    if(this.props.error){
+      vegalite = <p className = "center"><strong>{this.props.error}</strong></p>
     }
     
     return(
@@ -67,7 +76,8 @@ const mapStateToProps = state => {
     data: state.data,
     showgraph: state.showgraph,
     location: state.location,
-    loading: state.loading
+    loading: state.loading,
+    error: state.error
   };
 };
 
