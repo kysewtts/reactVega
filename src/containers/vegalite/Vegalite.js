@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import VegaLite from 'react-vega-lite';
 import { connect } from 'react-redux';
 
+
+import Spinner from '../../components/Spinner/spinner';
+
 class Vegalite extends Component{
   
   render(){
@@ -41,11 +44,19 @@ class Vegalite extends Component{
         "marginTop": "50px"
       };
     }
-    
-    return(
+    let vegalite = (
       <div className = "container center" style = {style}>
         <VegaLite spec={spec} data = {barData} />
         <p className="center"><b>Weather forecast for {this.props.location}</b></p>
+      </div>
+    );
+    if(this.props.loading){
+      vegalite = <Spinner />
+    }
+    
+    return(
+      <div>
+        {vegalite}
       </div>
     );
   }
@@ -55,7 +66,8 @@ const mapStateToProps = state => {
   return{
     data: state.data,
     showgraph: state.showgraph,
-    location: state.location
+    location: state.location,
+    loading: state.loading
   };
 };
 
