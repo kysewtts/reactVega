@@ -21,6 +21,9 @@ class Dashboard extends Component{
     }
 
     render(){
+        if(this.props.error){
+            console.log(this.props.error);
+        }
         return(
             <div className="container">
                 <h3 className="center">Enter data to get weather forecast statistics.</h3>
