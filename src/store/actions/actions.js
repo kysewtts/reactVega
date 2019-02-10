@@ -26,7 +26,7 @@ export const fetchFail = (error) => {
 export const fetch = (city, days) => {
     return dispatch => {
         dispatch(fetchStart());
-        axios.get("http://api.apixu.com/v1/forecast.json?key=e732a8571d2b4578b15114850190902&q=" + city + "&days=" + days)
+        axios.get("http://api.apixu.com/v1/forecast.json?key={your_api_key}&q=" + city + "&days=" + days)
             .then(response => {
                 dispatch(fetchSuccess(response.data.location.name, response.data.forecast))
             })
